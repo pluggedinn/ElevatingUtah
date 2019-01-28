@@ -3,7 +3,7 @@
     img-alt="Card image"
     img-top>
     <header class="post-card-header">
-      <span class="card-tag"><i v-if="video !== undefined" class="fas fa-video"></i> {{ tag }}</span>
+      <span class="card-tag"><i v-if="video !== undefined" class="fas fa-video mr-2"></i> {{ tag }}</span>
       <h2 class="card-title">{{ title }}</h2>
     </header>
     <section class="card-description">

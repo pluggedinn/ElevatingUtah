@@ -4,7 +4,7 @@
   <b-navbar toggleable="md" type="dark">
     <b-container class="site-bar"> 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-      <b-navbar-brand href="#">Elevating Utah Logo</b-navbar-brand>
+      <b-navbar-brand>Elevating Utah Logo</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
@@ -18,7 +18,7 @@
     </b-container>
   </b-navbar>
   <div v-if="showHeader !== undefined" class="site-header-content">
-    <h1 class="font-weight-bold">Mountains</h1>
+    <h1 class="font-weight-bold">Articles</h1>
   </div>
 </header>
 </template>
@@ -31,6 +31,15 @@ export default {
 </script>
 
 <style lang="scss">
+.navbar {
+  // background-color: #102135;
+  .navbar-brand {
+    // color: white;
+  }
+  .nav-item {
+    // color: lightgray;
+  }
+}
 .site-bar {
   position: relative;
   color: white;
