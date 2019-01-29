@@ -2,16 +2,14 @@
 <div>
   <scroll-navbar></scroll-navbar>
   <div class="article-title pb-5">
-    <h6 class="text-center pt-5">5 JANUARY 2019 / NEWS</h6>
-    <h1 class="text-center pt-1 font-weight-bold">Codeword Acquired By WE Communications</h1>
+    <h6 class="text-center pt-5">{{ dateTag }}</h6>
+    <h1 class="text-center pt-1 font-weight-bold">{{ article.title }}</h1>
   </div>
   <div class="article-header">
   </div>
   <b-container class="article-content">
     <b-col></b-col>
-    <b-col cols="10">
-      <p>I have big news today coming from San Francisco, New York, and Utah. It's not Enes Kanter eating a trillion cheesburgers and getting sick, though everyone should become familiar with that story. It's not the after shock of Donovan Mitchell dunking on poor JaVale McGee, nor is it another nasty spat between Draymond and Durant.</p>
-      <p>So, a little about both parties. Codeword is the agency formerly known as Knock Twice, operating out of two coastal locations (SF and NY) and one mountain (SLC). They have deep roots in tech and have carved out a niche in the content marketing world, emphasizing creativity with a staff of former journalists, publishers, and media members. They also love talking basketball with any stray passerbys, which is an added bonus. WE Communications is the artist formerly known as Waggener Edstrom and an agency that also has deep roots in tech. Under the leadership of CEO/co-founder Melissa Waggener Zorkin, WE has spent the last 35 years growing into one of the world's largest independent communication agencies: 20 offices worldwide, nearly 1,000 employees. Today's acquisition of Codeword will mark WE's first foray into Utah, so give Melissa a warm handshake and hearty congrats if you pass her on the way to Sodalicious.</p>
+    <b-col cols="10" v-html="article.contentHTML">
     </b-col>
     <b-col></b-col>
     </b-container>
@@ -20,15 +18,43 @@
 </template>
 
 <script>
-import NavHeader from '@/components/navbar/NavHeader'
+import firebase from 'firebase'
 import ScrollNavbar from '@/components/navbar/ScrollNavbar'
-import Card from '@/components/Card'
 import Footer from '@/components/Footer'
+import * as a from '@/content/articles'
 
 export default {
   name: 'Article',
+  props: ['articleString'],
   components: {
-    NavHeader, ScrollNavbar, Card, Footer
+    ScrollNavbar, Footer
+  },
+  data () {
+    return {
+      article: {}
+    }
+  },
+  computed: {
+    dateTag: function () {
+      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      let date = new Date(this.article.date).toLocaleDateString("en-US", options)
+      return date + ' / ' + this.article.tag
+    }
+  },
+  methods: {
+    load: function () {
+      let self = this
+      let articlesRef = firebase.firestore().collection('articles')
+      let getArticles = articlesRef.where("urlCode", "==", this.articleString).get().then(snapshot => {
+        snapshot.forEach(doc => {
+          self.article = doc.data()
+        })
+      })
+    }
+  },
+  created: function () {
+    console.log('loaded')
+    this.load()
   }
 }
 </script>

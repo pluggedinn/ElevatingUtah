@@ -1,10 +1,10 @@
 <template>
-<header class="site-header">
+<header v-bind:class="{ 'site-header-show': showHeader === '', 'site-header-hide': showHeader === undefined }">
   <div v-if="showHeader !== undefined" class="overlay"></div>
-  <b-navbar toggleable="md" type="dark">
+  <b-navbar toggleable="md">
     <b-container class="site-bar"> 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-      <b-navbar-brand>Elevating Utah Logo</b-navbar-brand>
+      <b-navbar-brand><img src="../../assets/logo.png" width="60"></b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
@@ -31,6 +31,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .navbar {
   // background-color: #102135;
   .navbar-brand {
@@ -45,7 +46,16 @@ export default {
   color: white;
   z-index:2;
 }
-.site-header {
+.site-header-hide {
+  background-color: whitesmoke;
+  .navbar-brand {
+    color: black;
+  }
+  .nav-link {
+    color: green;
+  }
+}
+.site-header-show {
   position: relative;
   background-image: url('../../assets/images/mountains.jpg');
   color: white;

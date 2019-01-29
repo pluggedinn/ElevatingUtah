@@ -15,8 +15,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/article/',
+      path: '/article/:articleString',
       name: 'article',
+      props: true,
       component: Article
     }
   ]

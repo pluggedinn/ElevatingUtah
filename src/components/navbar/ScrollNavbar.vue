@@ -1,7 +1,7 @@
 <template>
   <b-navbar v-if="scrollValue !== 0" sticky class="nav-scroll" type="light" variant="light">
     <b-progress :value="scrollValue" :max="scrollMax" class="progress"></b-progress>
-    <b-navbar-brand>Elevating Utah Logo</b-navbar-brand>
+    <b-navbar-brand><img src="../../assets/logo.png" width="60"></b-navbar-brand>
     <b-nav-text>Navbar text</b-nav-text>
   </b-navbar>
   <nav-header v-else></nav-header>
